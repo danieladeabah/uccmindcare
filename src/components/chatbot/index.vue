@@ -7,6 +7,12 @@
           <h2 class="ml-4 text-xl font-bold">UCC MindCare</h2>
         </div>
 
+        <div class="flex w-fit items-center justify-center px-4 py-3">
+          <p class="message-text">
+            <strong>Quote:</strong> {{ quoteOfTheDay }}
+          </p>
+        </div>
+
         <div
           v-if="userToken"
           ref="chatBodyRef"
@@ -169,15 +175,6 @@
             🤩 Mood Tracker
           </div>
         </div>
-
-        <div
-          class="m-4 flex w-fit items-start space-x-3 rounded-lg border border-gray-200 bg-green-50 px-4 py-3"
-        >
-          <p class="message-text">
-            <strong>Motivational Quote:</strong> <br />
-            {{ quoteOfTheDay }}
-          </p>
-        </div>
       </div>
     </template>
   </NuxtLayout>
@@ -196,6 +193,23 @@ const userToken = ref(null)
 const userData = ref(null)
 const chatHistory = ref([])
 
+// Array of predefined mental health quotes
+const quotes = [
+  'Your mental health matters. Take it one step at a time.',
+  'You are stronger than you think.',
+  'It’s okay to ask for help.',
+  'Your feelings are valid, and you deserve peace.',
+  'Take deep breaths, one moment at a time.',
+  'Healing is not linear, and that’s okay.',
+  'You are not alone; support is available.',
+  'Self-care is not selfish, it’s necessary.',
+  'You deserve kindness, especially from yourself.',
+  'Progress, not perfection. Keep going!'
+]
+
+const quoteOfTheDay = ref(quotes[0])
+let quoteInterval = null
+
 // Load user data and chat history from localStorage
 onMounted(() => {
   userToken.value = localStorage.getItem('userToken')
@@ -213,6 +227,13 @@ onMounted(() => {
       behavior: 'smooth'
     })
   }, 100)
+
+  // Rotate quotes every 30 seconds
+  let index = 0
+  quoteInterval = setInterval(() => {
+    index = (index + 1) % quotes.length
+    quoteOfTheDay.value = quotes[index]
+  }, 10000)
 })
 
 // Save chat history to localStorage
@@ -286,36 +307,4 @@ const moreOptions = [
     }
   ]
 ]
-
-const quoteOfTheDay = ref(
-  'Your mental health matters. Take it one step at a time.'
-) // Default fallback quote
-
-onMounted(async () => {
-  try {
-    const response = await fetch('https://zenquotes.io/api/quotes')
-    const quotes = await response.json()
-
-    // Filter only mental health-related quotes
-    const mentalHealthQuotes = quotes.filter(
-      q =>
-        q.q.toLowerCase().includes('mind') ||
-        q.q.toLowerCase().includes('mental health') ||
-        q.q.toLowerCase().includes('peace') ||
-        q.q.toLowerCase().includes('self-care') ||
-        q.q.toLowerCase().includes('strength') ||
-        q.q.toLowerCase().includes('healing')
-    )
-
-    // Pick a random mental health-related quote
-    const randomIndex = Math.floor(Math.random() * mentalHealthQuotes.length)
-    quoteOfTheDay.value =
-      mentalHealthQuotes[randomIndex]?.q ||
-      'Take a deep breath. You are doing great.'
-  } catch (error) {
-    console.error('Failed to fetch quote:', error)
-    quoteOfTheDay.value =
-      'Your emotions are valid. You are enough just as you are.'
-  }
-})
 </script>
