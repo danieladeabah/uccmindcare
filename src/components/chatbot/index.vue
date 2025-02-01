@@ -62,7 +62,7 @@
             class="flex w-full max-w-3xl items-center gap-4"
           >
             <UDropdown
-              :items="moreOptions"
+              :items="exploredTopics"
               :ui="{ item: { disabled: 'cursor-text select-text' } }"
               :popper="{ arrow: true }"
             >
@@ -79,7 +79,7 @@
               class="w-full rounded-3xl border border-gray-200 p-2 outline-none"
               required
             />
-            <button type="submit" class="material-symbols-rounded">
+            <button type="submit">
               <img src="/assets/icons/send-msg.svg" alt="Send" />
             </button>
           </form>
@@ -185,6 +185,7 @@ import { generateBotResponse } from '@/utils/botResponse'
 import { companyInfo } from '@/prompts/chatbot'
 import Logo from '@/assets/icons/ChatbotIcon.vue'
 import GoogleAuth from '@/pages/auth/index.vue'
+import { quotes } from '@/constants/index'
 
 // Refs
 const chatBodyRef = ref(null)
@@ -192,21 +193,6 @@ const inputRef = ref('')
 const userToken = ref(null)
 const userData = ref(null)
 const chatHistory = ref([])
-
-// Array of predefined mental health quotes
-const quotes = [
-  'Your mental health matters. Take it one step at a time.',
-  'You are stronger than you think.',
-  'It’s okay to ask for help.',
-  'Your feelings are valid, and you deserve peace.',
-  'Take deep breaths, one moment at a time.',
-  'Healing is not linear, and that’s okay.',
-  'You are not alone; support is available.',
-  'Self-care is not selfish, it’s necessary.',
-  'You deserve kindness, especially from yourself.',
-  'Progress, not perfection. Keep going!'
-]
-
 const quoteOfTheDay = ref(quotes[0])
 let quoteInterval = null
 
@@ -291,19 +277,23 @@ const handleSubmit = () => {
   })
 }
 
-const moreOptions = [
+const exploredTopics = [
   [
     {
-      label: 'Self-Assesment Tools'
+      label: 'Self-Assesment Tools',
+      click: () => {}
     },
     {
-      label: 'Resource Library'
+      label: 'Resource Library',
+      click: () => {}
     },
     {
-      label: 'Guided Relaxation'
+      label: 'Guided Relaxation',
+      click: () => {}
     },
     {
-      label: 'Emergency Support'
+      label: 'Emergency Support',
+      click: () => {}
     }
   ]
 ]
