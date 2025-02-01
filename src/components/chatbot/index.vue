@@ -108,35 +108,55 @@
         <div
           class="mt-4 flex h-[35vh] flex-col gap-2 overflow-y-auto overflow-x-hidden p-4"
         >
-          <div
-            @click="handleExploredTopicSelection('Self-Assessment Tools')"
-            class="flex cursor-pointer flex-col gap-2 rounded-2xl border p-2"
-          >
+          <div class="flex flex-col gap-2 rounded-2xl border p-2">
             <div
-              class="flex items-center gap-2 rounded-3xl border border-gray-200 p-2"
+              @click="handleExploredTopicSelection('Self-Assessment Tools')"
+              class="flex cursor-pointer items-center gap-2 rounded-3xl border border-gray-200 p-2"
             >
               <img src="/assets/icons/self-asses.svg" alt="self-asses" />
               Self-Assessment Tools
             </div>
             <p>
               Questionnaires to help students evaluate their mental health
-              condition (e.g., Depression, Anxiety, Stress, etc.)
+              condition (e.g.,
+              <span
+                @click="handleExploredTopicSelection('Depression')"
+                class="cursor-pointer text-blue-600"
+                >Depression</span
+              >,
+              <span
+                @click="handleExploredTopicSelection('Anxiety')"
+                class="cursor-pointer text-blue-600"
+                >Anxiety</span
+              >,
+              <span
+                @click="handleExploredTopicSelection('Stress')"
+                class="cursor-pointer text-blue-600"
+                >Stress</span
+              >, etc.)
             </p>
           </div>
 
-          <div
-            @click="handleExploredTopicSelection('Resource Library')"
-            class="flex cursor-pointer flex-col gap-2 rounded-2xl border p-2"
-          >
+          <div class="flex flex-col gap-2 rounded-2xl border p-2">
             <div
-              class="flex items-center gap-2 rounded-3xl border border-gray-200 p-2"
+              @click="handleExploredTopicSelection('Resource Library')"
+              class="flex cursor-pointer items-center gap-2 rounded-3xl border border-gray-200 p-2"
             >
               <img src="/assets/icons/media.svg" alt="media" />
               Resource Library
             </div>
             <p>
               Articles, videos, and podcasts to support your mental health (e.g.
-              Stress Management, coping strategies)
+              <span
+                @click="handleExploredTopicSelection('Stress Management')"
+                class="cursor-pointer text-blue-600"
+                >Stress Management</span
+              >,
+              <span
+                @click="handleExploredTopicSelection('coping strategies')"
+                class="cursor-pointer text-blue-600"
+                >coping strategies</span
+              >)
             </p>
           </div>
           <div
