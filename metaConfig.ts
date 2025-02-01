@@ -1,5 +1,5 @@
 export const metaConfig = {
-  title: './MindEase',
+  title: 'UCC MindCare',
   meta: [
     {
       name: 'description',
@@ -8,7 +8,7 @@ export const metaConfig = {
     },
     {
       name: 'keywords',
-      content: 'MindEase, Mental Health, Support, Counseling'
+      content: 'UCC MindCare, Mental Health, Support, Counseling'
     },
     {
       name: 'author',
