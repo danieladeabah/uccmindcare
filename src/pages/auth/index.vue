@@ -9,13 +9,16 @@
 </template>
 
 <script setup>
+// Composables and refs
 const user = ref(null)
 const config = useRuntimeConfig().public
 
+// Hook to load Google sign-in
 onMounted(() => {
   loadGoogleSignIn()
 })
 
+// Method to load Google sign-in
 const loadGoogleSignIn = () => {
   const script = document.createElement('script')
   script.src = 'https://accounts.google.com/gsi/client'
@@ -35,23 +38,22 @@ const loadGoogleSignIn = () => {
 }
 
 const handleCredentialResponse = response => {
+  // Set user token in local storage
   const idToken = response.credential
-
-  // Send ID token to backend for verification or store locally
   localStorage.setItem('userToken', idToken)
 
-  // Decode JWT token (optional, for local usage)
+  // Parse JWT token and set user data in local storage
   const userData = parseJwt(idToken)
   user.value = userData
-
-  // Store user data in local storage (optional, for local usage)
   localStorage.setItem('userData', JSON.stringify(userData))
 
+  // Reload the page to update the UI with the new user data
   if (userData) {
     window.location.reload()
   }
 }
 
+// Function to parse JWT token
 const parseJwt = token => {
   try {
     return JSON.parse(atob(token.split('.')[1]))

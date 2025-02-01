@@ -1,6 +1,7 @@
 <script setup>
 import { marked } from 'marked'
 
+// Props
 const props = defineProps(['chat'])
 </script>
 

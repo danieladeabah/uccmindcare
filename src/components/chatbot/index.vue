@@ -1,13 +1,11 @@
 <template>
   <NuxtLayout :name="'app-wrapper'">
     <div class="flex h-screen flex-col lg:h-[92vh]">
-      <!-- Header Section with Logo -->
       <div class="flex items-center justify-center py-4">
         <Logo class="h-8 w-8" />
         <h2 class="ml-4 text-xl font-bold">UCC MindCare</h2>
       </div>
 
-      <!-- Chat Body Section -->
       <div
         v-if="userToken"
         ref="chatBodyRef"
@@ -22,7 +20,7 @@
           </p>
         </div>
         <div class="mt-4 flex h-[10vh] flex-col gap-4">
-          <ChatMessage
+          <LazyChatbotMessage
             v-for="(chat, index) in chatHistory"
             :key="index"
             :chat="chat"
@@ -30,7 +28,6 @@
         </div>
       </div>
 
-      <!-- Google Authentication Section -->
       <div
         v-else
         class="flex h-full flex-col items-center justify-center gap-2"
@@ -49,7 +46,6 @@
         <p class="text-sm text-gray-500">© 2025 UCC MindCare</p>
       </div>
 
-      <!-- Form Section at the Bottom -->
       <div
         class="mb-4 flex flex-col items-center justify-center gap-4 bg-white p-4"
       >
@@ -81,10 +77,11 @@
 
 <script setup>
 import { generateBotResponse } from '@/utils/botResponse'
-import { companyInfo } from '@/prompts/index'
+import { companyInfo } from '@/prompts/chatbot'
 import Logo from '@/assets/icons/ChatbotIcon.vue'
 import GoogleAuth from '@/pages/auth/index.vue'
 
+// Refs
 const chatBodyRef = ref(null)
 const inputRef = ref('')
 const userToken = ref(null)
@@ -105,17 +102,20 @@ if (process.client) {
     : [{ hideInChat: true, role: 'model', text: companyInfo }]
 }
 
+// Save chat history to localStorage
 const saveChatHistory = () => {
   if (process.client) {
     localStorage.setItem('chatHistory', JSON.stringify(chatHistory.value))
   }
 }
 
+// Update chat history
 const setChatHistory = fn => {
   chatHistory.value = fn(chatHistory.value)
   saveChatHistory()
 }
 
+// Handle form submission
 const handleSubmit = () => {
   if (!inputRef.value.trim()) return
   const userMessage = inputRef.value
@@ -159,6 +159,7 @@ const handleSubmit = () => {
   })
 }
 
+// Scroll to bottom of chat
 onMounted(() => {
   setTimeout(() => {
     chatBodyRef.value?.scrollTo({

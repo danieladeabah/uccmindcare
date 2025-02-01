@@ -1,3 +1,3 @@
 <template>
-  <ChatBot />
+  <LazyChatbot />
 </template>
