@@ -63,7 +63,7 @@
               <img
                 src="/assets/icons/menu.svg"
                 alt="menu"
-                class="block h-6 w-6 cursor-pointer lg:hidden"
+                class="block cursor-pointer lg:hidden"
               />
             </UDropdown>
 
