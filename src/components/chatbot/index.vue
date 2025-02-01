@@ -106,20 +106,23 @@
           class="mt-4 flex h-[35vh] flex-col gap-2 overflow-y-auto overflow-x-hidden p-4"
         >
           <div
+            @click="handleExploredTopicSelection('Self-Assessment Tools')"
             class="flex cursor-pointer flex-col gap-2 rounded-2xl border p-2"
           >
             <div
               class="flex items-center gap-2 rounded-3xl border border-gray-200 p-2"
             >
               <img src="/assets/icons/self-asses.svg" alt="self-asses" />
-              Self-Assesment Tools
+              Self-Assessment Tools
             </div>
             <p>
-              Questionaires to help students evaluate their mental health
-              condition (e.g. Depression, Anxiety, Stress, etc.)
+              Questionnaires to help students evaluate their mental health
+              condition (e.g., Depression, Anxiety, Stress, etc.)
             </p>
           </div>
+
           <div
+            @click="handleExploredTopicSelection('Resource Library')"
             class="flex cursor-pointer flex-col gap-2 rounded-2xl border p-2"
           >
             <div
@@ -134,6 +137,7 @@
             </p>
           </div>
           <div
+            @click="handleExploredTopicSelection('Guided Relaxation')"
             class="flex cursor-pointer flex-col gap-2 rounded-2xl border p-2"
           >
             <div
@@ -150,6 +154,7 @@
             </p>
           </div>
           <div
+            @click="handleExploredTopicSelection('Emergency Support')"
             class="flex cursor-pointer flex-col gap-2 rounded-2xl border p-2"
           >
             <div
@@ -277,23 +282,49 @@ const handleSubmit = () => {
   })
 }
 
+// Handle selection of explored topics
+const handleExploredTopicSelection = topic => {
+  if (!userToken.value) return // Prevent sending if user is not logged in
+
+  setChatHistory(history => {
+    const updatedHistory = [...history, { role: 'user', text: topic }]
+    const thinkingHistory = [
+      ...updatedHistory,
+      { role: 'model', text: 'Thinking...' }
+    ]
+
+    setTimeout(() => {
+      generateBotResponse(
+        [
+          ...thinkingHistory.filter(msg => msg.text !== 'Thinking...'),
+          { role: 'user', text: `I want to learn more about: ${topic}` }
+        ],
+        chatHistory
+      )
+    }, 600)
+
+    return thinkingHistory
+  })
+}
+
+// Updated exploredTopics with click handlers
 const exploredTopics = [
   [
     {
-      label: 'Self-Assesment Tools',
-      click: () => {}
+      label: 'Self-Assessment Tools',
+      click: () => handleExploredTopicSelection('Self-Assessment Tools')
     },
     {
       label: 'Resource Library',
-      click: () => {}
+      click: () => handleExploredTopicSelection('Resource Library')
     },
     {
       label: 'Guided Relaxation',
-      click: () => {}
+      click: () => handleExploredTopicSelection('Guided Relaxation')
     },
     {
       label: 'Emergency Support',
-      click: () => {}
+      click: () => handleExploredTopicSelection('Emergency Support')
     }
   ]
 ]
