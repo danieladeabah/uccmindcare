@@ -37,13 +37,13 @@
             src="https://img.freepik.com/free-vector/doctor-hospital-healthcare-staff-work-front-side-rear-view-medic-male-character-white-robe-with-stethoscope-neck-take-gloves-hold-xray-cartoon-linear-flat-vector-illustration-set_107791-11919.jpg?t=st=1738385166~exp=1738388766~hmac=fc4d88a9d35f98046c1d499b871fe0489601dd62201c5eb1aca4d2bdeb9dbd6f&w=1380"
             alt=""
           />
-          <h1 class="text-2xl text-black">
+          <h1 class="text-md font-bold text-black">
             Mental Health | Support | Counseling
           </h1>
           <p>Sign in with Google to start a conversation</p>
           <GoogleAuth />
-          <p class="py-10 text-sm text-gray-500">
-            © 2025 | Group 5 - UCC MindCare
+          <p class="py-10 text-sm text-black">
+            © 2025, Group 5, UCC MindCare.
           </p>
         </div>
 
