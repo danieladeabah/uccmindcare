@@ -2,8 +2,8 @@
   <NuxtLayout :name="'app-wrapper'">
     <template #main>
       <div class="flex h-screen flex-col lg:h-[92vh]">
-        <div class="flex items-center justify-center py-4">
-          <Logo class="h-8 w-8" />
+        <div class="flex items-center justify-center py-4 lg:shadow-sm">
+          <Logo class="h-6 w-6" />
           <h2 class="ml-4 text-xl font-bold">UCC MindCare</h2>
         </div>
 
@@ -13,7 +13,7 @@
           class="chat-body flex-1 overflow-y-auto px-2 py-4"
         >
           <div
-            class="flex w-fit items-start space-x-3 rounded-lg border border-gray-200 bg-blue-50 px-4 py-3"
+            class="mt-2 flex w-fit items-start space-x-3 rounded-lg border border-gray-200 bg-blue-50 px-4 py-3"
           >
             <p class="message-text">
               <strong>Hello! {{ userData?.given_name }}.</strong> <br />
@@ -55,6 +55,18 @@
             @submit.prevent="handleSubmit"
             class="flex w-full max-w-3xl items-center gap-4"
           >
+            <UDropdown
+              :items="moreOptions"
+              :ui="{ item: { disabled: 'cursor-text select-text' } }"
+              :popper="{ arrow: true }"
+            >
+              <img
+                src="/assets/icons/menu.svg"
+                alt="menu"
+                class="block h-6 w-6 cursor-pointer lg:hidden"
+              />
+            </UDropdown>
+
             <input
               v-model="inputRef"
               placeholder="Message..."
@@ -88,7 +100,7 @@
         <p class="text-xs text-gray-500">{{ userData?.email }}</p>
 
         <div
-          class="mt-4 flex h-[45vh] flex-col gap-2 overflow-y-auto overflow-x-hidden p-4"
+          class="mt-4 flex h-[35vh] flex-col gap-2 overflow-y-auto overflow-x-hidden p-4"
         >
           <div
             class="flex cursor-pointer flex-col gap-2 rounded-2xl border p-2"
@@ -155,11 +167,19 @@
 
         <div>
           <div
-            class="m-4 flex cursor-pointer items-center gap-2 rounded-3xl border-2 border-blue-200 bg-slate-200 p-2 pr-4 font-bold"
+            class="m-4 flex cursor-pointer items-center gap-2 rounded-3xl border-2 p-2 pr-4 font-bold"
           >
-            <img src="/assets/icons/mood-tracker.svg" alt="mood-tracker" />
-            Mood Tracker
+            🤩 Mood Tracker
           </div>
+        </div>
+
+        <div
+          class="m-4 flex w-fit items-start space-x-3 rounded-lg border border-gray-200 bg-green-50 px-4 py-3"
+        >
+          <p class="message-text">
+            <strong>Motivational Quote:</strong> <br />
+            {{ quoteOfTheDay }}
+          </p>
         </div>
       </div>
     </template>
@@ -252,4 +272,53 @@ const handleSubmit = () => {
     return thinkingHistory
   })
 }
+
+const moreOptions = [
+  [
+    {
+      label: 'Self-Assesment Tools'
+    },
+    {
+      label: 'Resource Library'
+    },
+    {
+      label: 'Guided Relaxation'
+    },
+    {
+      label: 'Emergency Support'
+    }
+  ]
+]
+
+const quoteOfTheDay = ref(
+  'Your mental health matters. Take it one step at a time.'
+) // Default fallback quote
+
+onMounted(async () => {
+  try {
+    const response = await fetch('https://zenquotes.io/api/quotes')
+    const quotes = await response.json()
+
+    // Filter only mental health-related quotes
+    const mentalHealthQuotes = quotes.filter(
+      q =>
+        q.q.toLowerCase().includes('mind') ||
+        q.q.toLowerCase().includes('mental health') ||
+        q.q.toLowerCase().includes('peace') ||
+        q.q.toLowerCase().includes('self-care') ||
+        q.q.toLowerCase().includes('strength') ||
+        q.q.toLowerCase().includes('healing')
+    )
+
+    // Pick a random mental health-related quote
+    const randomIndex = Math.floor(Math.random() * mentalHealthQuotes.length)
+    quoteOfTheDay.value =
+      mentalHealthQuotes[randomIndex]?.q ||
+      'Take a deep breath. You are doing great.'
+  } catch (error) {
+    console.error('Failed to fetch quote:', error)
+    quoteOfTheDay.value =
+      'Your emotions are valid. You are enough just as you are.'
+  }
+})
 </script>
