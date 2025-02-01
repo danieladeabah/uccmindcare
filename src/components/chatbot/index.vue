@@ -7,7 +7,10 @@
           <h2 class="ml-4 text-xl font-bold">UCC MindCare</h2>
         </div>
 
-        <div class="flex w-fit items-center justify-center px-4 py-3">
+        <div
+          v-if="!userToken"
+          class="m-4 flex w-fit items-center justify-center rounded-3xl bg-blue-200 px-4 py-3"
+        >
           <p class="message-text">
             <strong>Quote:</strong> {{ quoteOfTheDay }}
           </p>
