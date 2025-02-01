@@ -4,7 +4,7 @@
       <!-- Header Section with Logo -->
       <div class="flex items-center justify-center py-4">
         <Logo class="h-8 w-8" />
-        <h2 class="ml-4 text-xl font-bold">MindEase</h2>
+        <h2 class="ml-4 text-xl font-bold">UCC MindCare</h2>
       </div>
 
       <!-- Chat Body Section -->
@@ -46,7 +46,7 @@
         <p class="pt-10 text-sm text-gray-500">
           Built for Educational purposes
         </p>
-        <p class="text-sm text-gray-500">© 2025 MindEase</p>
+        <p class="text-sm text-gray-500">© 2025 UCC MindCare</p>
       </div>
 
       <!-- Form Section at the Bottom -->
