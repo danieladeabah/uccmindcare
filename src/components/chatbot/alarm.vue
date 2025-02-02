@@ -1,7 +1,7 @@
 <template>
   <div
     @click="setMood = !setMood"
-    class="m-4 flex cursor-pointer items-center gap-2 rounded-3xl border-2 p-2 pr-4 font-bold"
+    class="m-4 flex cursor-pointer items-center gap-2 rounded-3xl border bg-green-50 p-2 pr-4 font-bold"
   >
     🤩 Mood Tracker
     <span class="font-light text-gray-500">| {{ countdown }} seconds</span>
@@ -10,22 +10,22 @@
     <form @submit.prevent="startMoodTracking">
       <input
         v-model="moodText"
-        placeholder="How do you intend to feel?"
+        placeholder="How do you want to feel?"
         class="w-full rounded-3xl border border-gray-200 p-2 outline-none"
         required
       />
-      <div class="my-4 flex gap-2">
+      <div class="my-4 flex items-center gap-2">
         <span class="flex items-center justify-start text-gray-500">When?</span>
         <input
           v-model="moodTime"
-          class="w-full rounded-3xl border border-gray-200 p-2 outline-none"
+          class="h-8 w-full rounded-3xl border border-gray-200 p-2 outline-none"
           required
           type="time"
         />
         <button type="submit">
           <img
             src="/assets/icons/start-mood.svg"
-            class="h-16 w-16"
+            class="h-10 w-10"
             alt="Start"
           />
         </button>
@@ -72,7 +72,7 @@ const startCountdown = timeDiff => {
       clearInterval(interval)
       if (alarmSound) alarmSound.play()
       localStorage.removeItem('moodTracker')
-      alert(`Time to feel: ${moodText.value}!`)
+      alert(`Reminder: ${moodText.value}!`)
     }
   }, 1000)
 }
