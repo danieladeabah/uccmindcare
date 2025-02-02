@@ -16,15 +16,14 @@
           </p>
         </div>
 
-        <div v-if="userToken" class="block lg:hidden">
-          <ChatbotAlarm />
-        </div>
-
         <div
           v-if="userToken"
           ref="chatBodyRef"
           class="chat-body flex-1 overflow-y-auto px-2 py-4"
         >
+          <div class="block lg:hidden">
+            <ChatbotAlarm />
+          </div>
           <div
             class="mt-2 flex w-fit items-start space-x-3 rounded-lg border border-gray-200 bg-blue-50 px-4 py-3"
           >
