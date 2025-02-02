@@ -1,0 +1,97 @@
+<template>
+  <div
+    @click="setMood = !setMood"
+    class="m-4 flex cursor-pointer items-center gap-2 rounded-3xl border-2 p-2 pr-4 font-bold"
+  >
+    🤩 Mood Tracker
+    <span class="font-light text-gray-500">| {{ countdown }} seconds</span>
+  </div>
+  <div v-if="setMood" class="flex flex-col gap-2 rounded-xl bg-slate-50 p-4">
+    <form @submit.prevent="startMoodTracking">
+      <input
+        v-model="moodText"
+        placeholder="How do you intend to feel?"
+        class="w-full rounded-3xl border border-gray-200 p-2 outline-none"
+        required
+      />
+      <div class="my-4 flex gap-2">
+        <span class="flex items-center justify-start text-gray-500">When?</span>
+        <input
+          v-model="moodTime"
+          class="w-full rounded-3xl border border-gray-200 p-2 outline-none"
+          required
+          type="time"
+        />
+        <button type="submit">
+          <img
+            src="/assets/icons/start-mood.svg"
+            class="h-16 w-16"
+            alt="Start"
+          />
+        </button>
+      </div>
+    </form>
+  </div>
+</template>
+
+<script setup>
+const moodText = ref('')
+const moodTime = ref('')
+const setMood = ref(false)
+const countdown = ref(null)
+
+const startMoodTracking = () => {
+  if (!moodText.value || !moodTime.value) return
+
+  const now = new Date()
+  const selectedTime = new Date()
+  const [hours, minutes] = moodTime.value.split(':')
+  selectedTime.setHours(hours, minutes, 0, 0)
+
+  const timeDiff = selectedTime - now
+  if (timeDiff <= 0) return // Ignore past times
+
+  localStorage.setItem(
+    'moodTracker',
+    JSON.stringify({
+      mood: moodText.value,
+      time: moodTime.value,
+      expiresAt: selectedTime.getTime()
+    })
+  )
+
+  startCountdown(timeDiff)
+}
+
+const startCountdown = timeDiff => {
+  countdown.value = Math.floor(timeDiff / 1000)
+
+  const interval = setInterval(() => {
+    countdown.value--
+    if (countdown.value <= 0) {
+      clearInterval(interval)
+      if (alarmSound) alarmSound.play()
+      localStorage.removeItem('moodTracker')
+      alert(`Time to feel: ${moodText.value}!`)
+    }
+  }, 1000)
+}
+
+let alarmSound
+
+onMounted(() => {
+  alarmSound = new Audio('https://www.tones7.com/media/office_phone.mp3')
+
+  const savedMood = JSON.parse(localStorage.getItem('moodTracker'))
+  if (savedMood) {
+    const now = new Date().getTime()
+    if (savedMood.expiresAt > now) {
+      moodText.value = savedMood.mood
+      moodTime.value = savedMood.time
+      startCountdown(savedMood.expiresAt - now)
+    } else {
+      localStorage.removeItem('moodTracker')
+    }
+  }
+})
+</script>

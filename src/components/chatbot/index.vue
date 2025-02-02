@@ -197,11 +197,7 @@
         </div>
 
         <div>
-          <div
-            class="m-4 flex cursor-pointer items-center gap-2 rounded-3xl border-2 p-2 pr-4 font-bold"
-          >
-            🤩 Mood Tracker
-          </div>
+          <ChatbotAlarm />
         </div>
       </div>
     </template>
@@ -271,10 +267,10 @@ const setChatHistory = fn => {
 // Handle form submission
 const handleSubmit = () => {
   if (!inputRef.value.trim()) return
-  if (!userData.value?.email) return // Ensure email exists
+  if (!userData.value?.email) return
 
   const userMessage = inputRef.value
-  const userEmail = userData.value.email // Capture user email
+  const userEmail = userData.value.email
 
   if (userMessage.toLowerCase() === 'clear') {
     localStorage.removeItem('chatHistory')
