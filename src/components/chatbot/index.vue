@@ -229,12 +229,15 @@ onMounted(() => {
   userToken.value = localStorage.getItem('userToken')
   userData.value = JSON.parse(localStorage.getItem('userData')) || null
 
-  const savedChatHistory = localStorage.getItem('chatHistory')
-  chatHistory.value = savedChatHistory
-    ? JSON.parse(savedChatHistory)
-    : [{ hideInChat: true, role: 'model', text: companyInfo }]
+  if (userData.value?.email) {
+    const savedChatHistory = localStorage.getItem(
+      `chatHistory_${userData.value.email}`
+    )
+    chatHistory.value = savedChatHistory
+      ? JSON.parse(savedChatHistory)
+      : [{ hideInChat: true, role: 'model', text: companyInfo }]
+  }
 
-  // Scroll to bottom of chat
   setTimeout(() => {
     chatBodyRef.value?.scrollTo({
       top: chatBodyRef.value.scrollHeight,
@@ -252,7 +255,11 @@ onMounted(() => {
 
 // Save chat history to localStorage
 const saveChatHistory = () => {
-  localStorage.setItem('chatHistory', JSON.stringify(chatHistory.value))
+  if (!userData.value?.email) return
+  localStorage.setItem(
+    `chatHistory_${userData.value.email}`,
+    JSON.stringify(chatHistory.value)
+  )
 }
 
 // Update chat history
@@ -264,7 +271,10 @@ const setChatHistory = fn => {
 // Handle form submission
 const handleSubmit = () => {
   if (!inputRef.value.trim()) return
+  if (!userData.value?.email) return // Ensure email exists
+
   const userMessage = inputRef.value
+  const userEmail = userData.value.email // Capture user email
 
   if (userMessage.toLowerCase() === 'clear') {
     localStorage.removeItem('chatHistory')
@@ -281,10 +291,13 @@ const handleSubmit = () => {
   inputRef.value = ''
 
   setChatHistory(history => {
-    const updatedHistory = [...history, { role: 'user', text: userMessage }]
+    const updatedHistory = [
+      ...history,
+      { role: 'user', text: userMessage, email: userEmail }
+    ]
     const thinkingHistory = [
       ...updatedHistory,
-      { role: 'model', text: 'Thinking...' }
+      { role: 'model', text: 'Thinking...', email: userEmail }
     ]
 
     setTimeout(() => {
@@ -320,7 +333,10 @@ const handleExploredTopicSelection = topic => {
       generateBotResponse(
         [
           ...thinkingHistory.filter(msg => msg.text !== 'Thinking...'),
-          { role: 'user', text: `I want to learn more about: ${topic}` }
+          {
+            role: 'user',
+            text: `Use information in ${companyInfo} to answer ${topic} for the support and service you provide on mental health`
+          }
         ],
         chatHistory
       )
