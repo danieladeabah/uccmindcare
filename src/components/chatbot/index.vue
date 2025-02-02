@@ -237,13 +237,6 @@ onMounted(() => {
       : [{ hideInChat: true, role: 'model', text: companyInfo }]
   }
 
-  setTimeout(() => {
-    chatBodyRef.value?.scrollTo({
-      top: chatBodyRef.value.scrollHeight,
-      behavior: 'smooth'
-    })
-  }, 100)
-
   // Rotate quotes every 30 seconds
   let index = 0
   quoteInterval = setInterval(() => {
@@ -269,6 +262,13 @@ const setChatHistory = fn => {
 
 // Handle form submission
 const handleSubmit = () => {
+  setTimeout(() => {
+    chatBodyRef.value?.scrollTo({
+      top: chatBodyRef.value.scrollHeight,
+      behavior: 'smooth'
+    })
+  }, 100)
+
   if (!inputRef.value.trim()) return
   if (!userData.value?.email) return
 
@@ -276,7 +276,7 @@ const handleSubmit = () => {
   const userEmail = userData.value.email
 
   if (userMessage.toLowerCase() === 'clear') {
-    localStorage.removeItem('chatHistory')
+    localStorage.removeItem(`chatHistory_${userData.value.email}`)
     chatHistory.value = [{ hideInChat: true, role: 'model', text: companyInfo }]
     inputRef.value = ''
     return
@@ -305,8 +305,7 @@ const handleSubmit = () => {
           ...thinkingHistory.filter(msg => msg.text !== 'Thinking...'),
           {
             role: 'user',
-            text: `Using the details provided above, please address this query: ${userMessage}. 
-            If user asked for thier own name: ${userData.value?.given_name} ${userData.value?.family_name}.`
+            text: `Using the details provided above, please address this query: ${userMessage}. When you want to mention the user, the name is ${userData.value.given_name} or you can address them by their full name ${userData.value.given_name} ${userData.value.family_name}`
           }
         ],
         chatHistory
@@ -319,7 +318,14 @@ const handleSubmit = () => {
 
 // Handle selection of explored topics
 const handleExploredTopicSelection = topic => {
-  if (!userToken.value) return // Prevent sending if user is not logged in
+  setTimeout(() => {
+    chatBodyRef.value?.scrollTo({
+      top: chatBodyRef.value.scrollHeight,
+      behavior: 'smooth'
+    })
+  }, 100)
+
+  if (!userToken.value) return
 
   setChatHistory(history => {
     const updatedHistory = [...history, { role: 'user', text: topic }]
