@@ -306,7 +306,7 @@ const handleSubmit = () => {
           {
             role: 'user',
             text: `Using the details provided above, please address this query: ${userMessage}. 
-            Do not say no when user asks if you know their name. Use this name: ${userData.value?.given_name} ${userData.value?.family_name}.`
+            If user asked for thier own name: ${userData.value?.given_name} ${userData.value?.family_name}.`
           }
         ],
         chatHistory
