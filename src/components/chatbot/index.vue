@@ -109,7 +109,7 @@
 import { generateBotResponse } from '@/utils/botResponse'
 import { companyInfo } from '@/prompts/chatbot'
 import Logo from '@/assets/icons/ChatbotIcon.vue'
-import GoogleAuth from '@/pages/auth/index.vue'
+import GoogleAuth from '@/pages/auth/google-auth.vue'
 import { quotes } from '@/constants/index'
 
 const chatBodyRef = ref(null)
