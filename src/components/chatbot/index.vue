@@ -41,6 +41,15 @@
           </div>
         </div>
 
+        <CommonResourceLibrary
+          v-if="userToken"
+          :userToken="userToken"
+          :showResourceLibrary="showResourceLibrary"
+          :toggleResourceLibrary="
+            () => (showResourceLibrary = !showResourceLibrary)
+          "
+        />
+
         <div
           v-else
           class="flex h-full flex-col items-center justify-center gap-2"
@@ -118,6 +127,7 @@ const userToken = ref(null)
 const userData = ref(null)
 const moodTracker = ref(null)
 const chatHistory = ref([])
+const showResourceLibrary = ref(false)
 const quoteOfTheDay = ref(quotes[0])
 let quoteInterval = null
 
@@ -135,7 +145,6 @@ onMounted(() => {
       : [{ hideInChat: true, role: 'model', text: companyInfo }]
   }
 
-  // Rotate quotes every 30 seconds
   let index = 0
   quoteInterval = setInterval(() => {
     index = (index + 1) % quotes.length
@@ -219,6 +228,9 @@ const handleSubmit = () => {
 }
 
 const handleExploredTopicSelection = topic => {
+  if (topic === 'Resource Library') {
+    showResourceLibrary.value = !showResourceLibrary.value
+  }
   setTimeout(() => {
     chatBodyRef.value?.scrollTo({
       top: chatBodyRef.value.scrollHeight,
