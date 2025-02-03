@@ -206,7 +206,7 @@ const handleSubmit = () => {
     ]
 
     let userModdText = ''
-    if (moodTracker.value.mood) {
+    if (moodTracker.value) {
       userModdText = `When a user want help with their mood use ${moodTracker.value.mood}. Assist them with their mood till they are satisfied. Make your conversation with the mood concise.`
     }
 
