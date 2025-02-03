@@ -1,36 +1,53 @@
 <template>
   <div
-    @click="setMood = !setMood"
-    class="m-4 flex cursor-pointer items-center gap-2 rounded-3xl border bg-green-50 p-2 pr-4 font-bold"
+    class="rounded-xl bg-white p-1"
+    :class="{ '': !setMood, border: setMood }"
   >
-    🤩 Mood Tracker
-    <span class="font-light text-gray-500">| {{ countdown }} seconds</span>
-  </div>
-  <div v-if="setMood" class="flex flex-col gap-2 rounded-xl bg-slate-50 p-4">
-    <form @submit.prevent="startMoodTracking">
-      <input
-        v-model="moodText"
-        placeholder="How do you want to feel?"
-        class="w-full rounded-3xl border border-gray-200 p-2 outline-none"
-        required
-      />
-      <div class="my-4 flex items-center gap-2">
-        <span class="flex items-center justify-start text-gray-500">When?</span>
-        <input
-          v-model="moodTime"
-          class="h-8 w-full rounded-3xl border border-gray-200 p-2 outline-none"
-          required
-          type="time"
-        />
-        <button type="submit">
-          <img
-            src="/assets/icons/start-mood.svg"
-            class="h-10 w-10"
-            alt="Start"
-          />
-        </button>
+    <div class="flex flex-row items-center justify-center">
+      <div
+        @click="setMood = !setMood"
+        class="m-4 flex cursor-pointer items-center gap-2 rounded-3xl border bg-green-50 p-2 pr-4 font-bold"
+      >
+        🤩 Mood Tracker
+        <span class="font-light text-gray-500">| {{ countdown }} seconds</span>
       </div>
-    </form>
+
+      <div
+        v-if="!setMood"
+        title="Mindcare will assist you with your mood"
+        class="cursor-pointer"
+      >
+        <img src="/assets/icons/info-icon.svg" class="h-4 w-4" alt="Start" />
+      </div>
+    </div>
+    <div v-if="setMood" class="flex flex-col gap-2 rounded-xl bg-slate-50 p-4">
+      <form @submit.prevent="startMoodTracking">
+        <input
+          v-model="moodText"
+          placeholder="How are you feeling?"
+          class="w-full rounded-3xl border border-gray-200 p-2 outline-none"
+          required
+        />
+        <div class="my-4 flex items-center gap-2">
+          <span class="flex items-center justify-start text-gray-500"
+            >End?</span
+          >
+          <input
+            v-model="moodTime"
+            class="h-8 w-full rounded-3xl border border-gray-200 p-2 outline-none"
+            required
+            type="time"
+          />
+          <button type="submit">
+            <img
+              src="/assets/icons/start-mood.svg"
+              class="h-10 w-10"
+              alt="Start"
+            />
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 

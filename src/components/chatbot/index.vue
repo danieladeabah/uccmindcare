@@ -116,6 +116,7 @@ const chatBodyRef = ref(null)
 const inputRef = ref('')
 const userToken = ref(null)
 const userData = ref(null)
+const moodTracker = ref(null)
 const chatHistory = ref([])
 const quoteOfTheDay = ref(quotes[0])
 let quoteInterval = null
@@ -123,6 +124,7 @@ let quoteInterval = null
 onMounted(() => {
   userToken.value = localStorage.getItem('userToken')
   userData.value = JSON.parse(localStorage.getItem('userData')) || null
+  moodTracker.value = JSON.parse(localStorage.getItem('moodTracker')) || null
 
   if (userData.value?.email) {
     const savedChatHistory = localStorage.getItem(
@@ -194,13 +196,18 @@ const handleSubmit = () => {
       { role: 'model', text: 'Thinking...', email: userEmail }
     ]
 
+    let userModdText = ''
+    if (moodTracker.value) {
+      userModdText = `When a user want help with their mood use ${moodTracker.value.mood}. Assist them with their mood till they are satisfied. Make your conversation with the mood concise.`
+    }
+
     setTimeout(() => {
       generateBotResponse(
         [
           ...thinkingHistory.filter(msg => msg.text !== 'Thinking...'),
           {
             role: 'user',
-            text: `Using the details provided above, please address this query: ${userMessage}. When you want to mention the user, the name is ${userData.value.given_name} or you can address them by their full name ${userData.value.given_name} ${userData.value.family_name}`
+            text: `Using the details provided above, please address this query: ${userMessage}. When you want to mention the user, the name is ${userData.value.given_name} or you can address them by their full name ${userData.value.given_name} ${userData.value.family_name}. ${userModdText}`
           }
         ],
         chatHistory
