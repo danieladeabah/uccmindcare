@@ -10,35 +10,35 @@ You can also tell them to: Take care, and remember, you deserve all the support 
 
 Resource Library: provide the following and explain to the user how these resources can help them with their mental health;
 
-link: 'https://www.youtube.com/watch?v=SB2AT9qCkTc',
-title: 'Coping Strategies for Stress',
-icon: 'https://yt3.ggpht.com/mHpKsN5FDt63qSiNrUOS16ud-cwL7PtuyOOutBp4ULeiD02W7PHhTvGV4zJZM1eZqTNh77jb5w=s48-c-k-c0x00ffffff-no-rj',
-label: 'Video: Coping Strategies for Stress'
+link: https://www.youtube.com/watch?v=SB2AT9qCkTc
+title: Coping Strategies for Stress
+icon: https://yt3.ggpht.com/mHpKsN5FDt63qSiNrUOS16ud-cwL7PtuyOOutBp4ULeiD02W7PHhTvGV4zJZM1eZqTNh77jb5w=s48-c-k-c0x00ffffff-no-rj
+label: Video: Coping Strategies for Stress
 
-link: 'https://www.youtube.com/watch?v=jVJGlSKX8xs',
-title: 'Stress management and coping strategies',
-icon: 'https://yt3.ggpht.com/crwWoOHF7Jv15UAbJsuG4mVJ-SP2r2Ayd33Y-tArrAToMkw_PoKIX6jYaPh_35SfezJ0-BgJjg=s48-c-k-c0x00ffffff-no-rj',
-label: 'Video: Stress management and coping strategies'
+link: https://www.youtube.com/watch?v=jVJGlSKX8xs
+title: Stress management and coping strategies
+icon: https://yt3.ggpht.com/crwWoOHF7Jv15UAbJsuG4mVJ-SP2r2Ayd33Y-tArrAToMkw_PoKIX6jYaPh_35SfezJ0-BgJjg=s48-c-k-c0x00ffffff-no-rj
+label: Video: Stress management and coping strategies
 
-link: 'https://www.youtube.com/watch?v=YOYEtyp5lGk',
-title: 'Podcast #84: 8 Simple steps to build up your stress resilience',
-icon: 'https://api.iconify.design/solar:hashtag-linear.svg',
-label: 'Podcast #84: 8 Simple steps to build up your stress resilience'
+link: https://www.youtube.com/watch?v=YOYEtyp5lGk
+title: Podcast #84: 8 Simple steps to build up your stress resilience
+icon: https://api.iconify.design/solar:hashtag-linear.svg
+label: Podcast #84: 8 Simple steps to build up your stress resilience
 
-link: 'https://mcpress.mayoclinic.org/mental-health/building-habits-for-healthy-stress-management/',
-title: 'Building healthy habits with stress management techniques',
-icon: 'https://mcpress.mayoclinic.org/wp-content/uploads/2022/06/BuildingHabitsxGettyImagesx1308849985-1024x683-1-1024x640.jpg',
-label: 'Article: Building healthy habits with stress management techniques'
+link: https://mcpress.mayoclinic.org/mental-health/building-habits-for-healthy-stress-management/
+title: Building healthy habits with stress management techniques
+icon: https://mcpress.mayoclinic.org/wp-content/uploads/2022/06/BuildingHabitsxGettyImagesx1308849985-1024x683-1-1024x640.jpg
+label: Article: Building healthy habits with stress management techniques
 
-link: 'https://open.spotify.com/show/5Gly8T0LZ5lMkMGbu654Ou',
-title: 'Podcast: Adrian Gostick & Chester Elton',
-icon: 'https://api.iconify.design/solar:hashtag-linear.svg',
-label: 'Podcast: Adrian Gostick & Chester Elton'
+link: https://open.spotify.com/show/5Gly8T0LZ5lMkMGbu654Ou
+title: Podcast: Adrian Gostick & Chester Elton
+icon: https://api.iconify.design/solar:hashtag-linear.svg
+label: Podcast: Adrian Gostick & Chester Elton
 
-link: 'https://open.spotify.com/show/0gahU19SN8cT3fkotPwzT5',
-title: 'Podcast: Calmly coping by Tatiana Garcia',
-icon: 'https://api.iconify.design/solar:hashtag-linear.svg',
-label: 'Podcast: Calmly coping by Tatiana Garcia'
+link: https://open.spotify.com/show/0gahU19SN8cT3fkotPwzT5
+title: Podcast: Calmly coping by Tatiana Garcia
+icon: https://api.iconify.design/solar:hashtag-linear.svg
+label: Podcast: Calmly coping by Tatiana Garcia
 
 
 Guided Relaxation: Provide information on how to practice guided relaxation and meditation.;
