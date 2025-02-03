@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { metaConfig } from './metaConfig'
+import { metaConfig } from '~~/metaConfig'
 
 useHead(metaConfig)
 </script>

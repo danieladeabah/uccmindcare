@@ -1,21 +1,58 @@
 export const metaConfig = {
   title: 'UCC MindCare',
+  link: [
+    { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+    {
+      rel: 'preconnect',
+      href: 'https://fonts.gstatic.com',
+      crossorigin: '' as any
+    },
+    {
+      href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap',
+      rel: 'stylesheet'
+    },
+    { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+  ],
   meta: [
     {
       name: 'description',
-      content:
-        'I am a mental health counselor based at Cape Coast University, Ghana, offering free, confidential support services to anyone in need. My role is to provide guidance, emotional support, and resources for anyone facing mental health challenges, such as stress, anxiety, depression, or personal struggles'
+      content: 'UCC MindCare, Mental Health, Support, Counseling'
     },
     {
       name: 'keywords',
       content: 'UCC MindCare, Mental Health, Support, Counseling'
     },
-    {
-      name: 'author',
-      content: 'Final year project | 2025 - Cape Coast University'
-    },
+    { name: 'author', content: 'Daniel Adeabah' },
     { name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
-    { name: 'robots', content: 'index, follow' }
+    { name: 'robots', content: 'index, follow' },
+    { name: 'googlebot', content: 'index, follow' },
+    {
+      property: 'og:title',
+      content: 'UCC MindCare'
+    },
+    {
+      property: 'og:description',
+      content: 'UCC MindCare, Mental Health, Support, Counseling'
+    },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:url', content: 'https://ucc-mindcare.vercel.app' },
+    {
+      property: 'og:image',
+      content: 'https://ucc-mindcare.vercel.app/og-image.jpg'
+    },
+    { property: 'twitter:card', content: 'summary_large_image' },
+    {
+      property: 'twitter:title',
+      content: 'UCC MindCare'
+    },
+    {
+      property: 'twitter:description',
+      content: 'UCC MindCare, Mental Health, Support, Counseling'
+    },
+    {
+      property: 'twitter:image',
+      content: 'https://ucc-mindcare.vercel.app/og-image.jpg'
+    }
   ],
   htmlAttrs: {
     lang: 'en'
