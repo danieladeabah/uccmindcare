@@ -7,42 +7,42 @@ self-assessment tools, guided relaxation, and emergency support. Authentication
 is handled via **Google Auth**, and AI responses are powered by **Google Gemini
 API**.
 
-## 🚀 Features
+## Features
 
-### 🧠 AI Chatbot (UCC MindCare)
+### AI Chatbot (UCC MindCare)
 
 - Chat with an AI assistant specialized in mental health.
 - Provides guidance on stress, anxiety, depression, and general well-being.
 - Uses **Google Gemini API** to generate intelligent responses.
 
-### 📅 Mood Tracker
+### Mood Tracker
 
 - Users can input their mood along with a text note.
 - Set reminders to check in on their emotional well-being.
 
-### 📚 Resource Library
+### Resource Library
 
 - Access to mental health articles, videos, and audio guides.
 - Covers topics like **stress management, coping strategies, mindfulness**, and
   more.
 
-### 🛟 Emergency Support
+### Emergency Support
 
 - Direct links to **UCC Counseling Services, emergency contacts, and
   helplines**.
 - Provides quick access to crisis intervention.
 
-### 🌿 Guided Relaxation
+### Guided Relaxation
 
 - Audio-guided meditation and breathing exercises.
 - Helps users practice mindfulness and relaxation techniques.
 
-### 📝 Self-Assessment Tools
+### Self-Assessment Tools
 
 - Users can take mental health self-assessments for **depression, anxiety,
   stress**, and more.
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Framework:** Nuxt 3 (Vue.js)
 - **Authentication:** Google OAuth
@@ -50,7 +50,7 @@ API**.
 - **State Management:** Vue 3 Composition API
 - **Styling:** Tailwind CSS
 
-## 📦 Installation & Setup
+## Installation & Setup
 
 ### Prerequisites
 
@@ -94,7 +94,7 @@ yarn preview # locally preview production build
 
 The app will be available at **http://localhost:3000**
 
-## 📜 Usage
+## Usage
 
 1. **Sign in with Google** to access features.
 2. **Chat with UCC MindCare AI** to get mental health guidance.
@@ -102,7 +102,7 @@ The app will be available at **http://localhost:3000**
 4. **Explore the Resource Library** for videos, articles, and audio guides.
 5. **Use emergency support links** if needed.
 
-## 📄 Folder Structure
+## Folder Structure
 
 ```sh
 📦 ucc-mindcare
@@ -113,6 +113,7 @@ The app will be available at **http://localhost:3000**
 ├── 📂 pages             # Nuxt pages (routes)
 ├── 📂 prompts           # Predefined chatbot prompts and responses
 ├── 📂 utils             # Helper functions and utility methods
+├── app.vue             # App entry
 ├── .env                # Environment variables
 ├── nuxt.config.ts      # Nuxt configuration
 └── package.json        # Dependencies and scripts
@@ -121,20 +122,6 @@ The app will be available at **http://localhost:3000**
 ## 🔥 Deployment
 
 To deploy the app, use **Vercel, Netlify, or any Node.js-compatible hosting**.
-
-### Deploy to Vercel
-
-```sh
-npm run build
-vercel
-```
-
-### Deploy to Netlify
-
-```sh
-npm run generate
-netlify deploy
-```
 
 ## 🤝 Contributing
 
