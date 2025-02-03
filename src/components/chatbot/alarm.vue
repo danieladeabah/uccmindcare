@@ -23,7 +23,7 @@
 
       <div
         title="Mindcare will assist you with your mood"
-        class="cursor-pointer"
+        class="hidden cursor-pointer lg:block"
       >
         <img src="/assets/icons/info-icon.svg" class="h-4 w-4" alt="Start" />
       </div>
