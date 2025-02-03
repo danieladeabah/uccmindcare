@@ -14,7 +14,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      VUE_API_URL: process.env.VUE_API_URL ?? '',
+      GOOGLE_GEMINI_API_KEY: process.env.GOOGLE_GEMINI_API_KEY ?? '',
       googleClientId: process.env.GOOGLE_CLIENT_ID ?? ''
     }
   }

@@ -79,7 +79,7 @@ Create a `.env` file in the root directory and configure the required keys:
 
 ```env
 GOOGLE_CLIENT_ID=your_google_client_id
-VUE_API_URL=your_gemini_api_key
+GOOGLE_GEMINI_API_KEY=your_gemini_api_key
 ```
 
 ### Run the Development Server

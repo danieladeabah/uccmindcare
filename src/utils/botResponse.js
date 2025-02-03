@@ -8,11 +8,14 @@ export const generateBotResponse = async (history, chatHistoryRef) => {
 
   history = history.map(({ role, text }) => ({ role, parts: [{ text }] }))
   try {
-    const response = await fetch(useRuntimeConfig().public.VUE_API_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ contents: history })
-    })
+    const response = await fetch(
+      useRuntimeConfig().public.GOOGLE_GEMINI_API_KEY,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ contents: history })
+      }
+    )
     const data = await response.json()
     if (!response.ok)
       throw new Error(data?.error?.message || 'Something went wrong!')
