@@ -1,7 +1,16 @@
 <template>
   <div
-    class="rounded-xl bg-white p-1"
-    :class="{ '': !setMood, border: setMood }"
+    class="rounded-xl bg-white p-1 2xl:fixed 2xl:bottom-4 2xl:right-12 2xl:flex 2xl:flex-col"
+    :class="{
+      'border-4 border-red-600': countdown === 0,
+      'border-4 border-green-600':
+        countdown === 5 ||
+        countdown === 4 ||
+        countdown === 3 ||
+        countdown === 2 ||
+        countdown === 1,
+      border: setMood
+    }"
   >
     <div class="flex flex-row items-center justify-center">
       <div
@@ -13,14 +22,24 @@
       </div>
 
       <div
-        v-if="!setMood"
         title="Mindcare will assist you with your mood"
         class="cursor-pointer"
       >
         <img src="/assets/icons/info-icon.svg" class="h-4 w-4" alt="Start" />
       </div>
     </div>
-    <div v-if="setMood" class="flex flex-col gap-2 rounded-xl bg-slate-50 p-4">
+    <div
+      v-if="
+        setMood ||
+        countdown === 5 ||
+        countdown === 4 ||
+        countdown === 3 ||
+        countdown === 2 ||
+        countdown === 1 ||
+        countdown === 0
+      "
+      class="flex flex-col gap-2 rounded-xl bg-slate-50 p-4"
+    >
       <form @submit.prevent="startMoodTracking">
         <input
           v-model="moodText"
@@ -89,7 +108,12 @@ const startCountdown = timeDiff => {
       clearInterval(interval)
       if (alarmSound) alarmSound.play()
       localStorage.removeItem('moodTracker')
-      alert(`Reminder: ${moodText.value}!`)
+
+      setTimeout(() => {
+        countdown.value = null
+        moodText.value = ''
+        moodTime.value = ''
+      }, 10000) // clear countdown after 10 seconds
     }
   }, 1000)
 }
