@@ -113,7 +113,7 @@ The app will be available at **http://localhost:3000**
 ├── 📂 pages             # Nuxt pages (routes)
 ├── 📂 prompts           # Predefined chatbot prompts and responses
 ├── 📂 utils             # Helper functions and utility methods
-├── app.vue             # App entry
+├── app                 # App entry
 ├── .env                # Environment variables
 ├── nuxt.config.ts      # Nuxt configuration
 └── package.json        # Dependencies and scripts
