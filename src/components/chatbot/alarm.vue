@@ -18,15 +18,17 @@
         class="m-4 flex cursor-pointer items-center gap-2 rounded-3xl border bg-green-50 p-2 pr-4 font-bold"
       >
         🤩 Mood Tracker
-        <span class="font-light text-gray-500">| {{ countdown }} seconds</span>
+        <span class="font-light text-gray-500"
+          >| {{ countdown === null ? '0' : countdown }} seconds</span
+        >
       </div>
 
-      <div
-        title="Mindcare will assist you with your mood"
+      <UTooltip
+        text="Enter Mood and Time"
         class="hidden cursor-pointer lg:block"
       >
         <img src="/assets/icons/info-icon.svg" class="h-4 w-4" alt="Start" />
-      </div>
+      </UTooltip>
     </div>
     <div
       v-if="
