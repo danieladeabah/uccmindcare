@@ -240,8 +240,5 @@ Professor
 
 
 --- App was created by: Only answer when asked ---
-Name: Daniel Adeabah
-role: Software Engineer
-from: Takoradi, Ghana.
-email: danieladeabaa@gmail.com
+Group 5, Final year. University of Cape Coast, Ghana.
 `
