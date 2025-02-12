@@ -7,7 +7,10 @@
       <div class="min-w-full md:rounded-xl md:border lg:rounded-xl lg:border">
         <slot name="main"></slot>
       </div>
-      <div v-if="userToken" class="hidden min-w-[350px] lg:block">
+      <div
+        v-if="userToken"
+        class="hidden min-w-[350px] lg:block xl:block 2xl:block"
+      >
         <slot name="sidebar"></slot>
       </div>
     </div>
