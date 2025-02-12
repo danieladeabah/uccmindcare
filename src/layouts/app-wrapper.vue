@@ -9,7 +9,7 @@
       </div>
       <div
         v-if="userToken"
-        class="hidden min-w-[350px] lg:block xl:block 2xl:block"
+        class="hidden min-w-[350px] md:hidden xl:hidden 2xl:block"
       >
         <slot name="sidebar"></slot>
       </div>

@@ -84,7 +84,7 @@
               <img
                 src="/assets/icons/menu.svg"
                 alt="menu"
-                class="hidden cursor-pointer lg:block xl:block 2xl:block"
+                class="block cursor-pointer xl:block 2xl:hidden"
               />
             </UDropdown>
 
