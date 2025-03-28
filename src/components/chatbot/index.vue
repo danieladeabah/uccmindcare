@@ -24,20 +24,43 @@
           <div class="block lg:hidden">
             <ChatbotAlarm />
           </div>
+
+          <!-- Centered welcome message when only one chat message exists -->
           <div
-            class="mt-2 flex w-fit items-start space-x-3 rounded-lg border border-gray-200 bg-blue-50 px-4 py-3"
+            v-if="chatHistory.length === 1"
+            class="flex flex-grow flex-col items-center justify-center text-center"
           >
-            <p class="message-text">
-              <strong>Hello! {{ userData?.given_name }}.</strong> <br />
-              How can I assist you in your mental wellness journey today?
+            <h1
+              class="my-4 text-4xl font-semibold text-gray-700 dark:text-gray-300"
+            >
+              Hello, {{ userData?.given_name }}.
+            </h1>
+            <p class="text-sm text-gray-500">
+              Start a conversation by selecting a prompt below
             </p>
+
+            <!-- Suggested chat bubbles -->
+            <div class="mt-4 flex flex-wrap justify-center gap-2">
+              <button
+                v-for="(suggestion, index) in chatSuggestions"
+                :key="index"
+                @click="handleExploredTopicSelection(suggestion)"
+                class="rounded-full border border-gray-300 px-4 py-2 text-sm text-gray-700 transition hover:bg-gray-200 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700"
+              >
+                {{ suggestion }}
+              </button>
+            </div>
           </div>
-          <div class="mt-4 flex h-[10vh] flex-col gap-4">
-            <LazyChatbotMessage
-              v-for="(chat, index) in chatHistory"
-              :key="index"
-              :chat="chat"
-            />
+
+          <!-- Chat messages -->
+          <div v-else class="flex w-full flex-col">
+            <div class="mt-4 flex flex-col gap-4">
+              <LazyChatbotMessage
+                v-for="(chat, index) in chatHistory"
+                :key="index"
+                :chat="chat"
+              />
+            </div>
           </div>
         </div>
 
@@ -115,8 +138,7 @@
 </template>
 
 <script setup>
-import { generateBotResponse } from '@/utils/botResponse'
-import { companyInfo } from '@/prompts/chatbot'
+import { instructions } from '@/prompts/chatbot'
 import Logo from '@/assets/icons/ChatbotIcon.vue'
 import GoogleAuth from '@/pages/auth/google-auth.vue'
 import { quotes } from '@/constants/index'
@@ -131,6 +153,15 @@ const showResourceLibrary = ref(false)
 const quoteOfTheDay = ref(quotes[0])
 let quoteInterval = null
 
+const chatSuggestions = ref([
+  'Self-Assessment Tools',
+  'Resource Library',
+  'Guided Relaxation',
+  'Emergency Support',
+  'How can I manage stress?',
+  'What are signs of depression?'
+])
+
 onMounted(() => {
   userToken.value = localStorage.getItem('userToken')
   userData.value = JSON.parse(localStorage.getItem('userData')) || null
@@ -142,7 +173,7 @@ onMounted(() => {
     )
     chatHistory.value = savedChatHistory
       ? JSON.parse(savedChatHistory)
-      : [{ hideInChat: true, role: 'model', text: companyInfo }]
+      : [{ hideInChat: true, role: 'model', text: instructions }]
   }
 
   let index = 0
@@ -167,6 +198,41 @@ const setChatHistory = fn => {
   saveChatHistory()
 }
 
+const generateBotResponse = async history => {
+  const formattedHistory = history.map(({ role, text }) => ({
+    role,
+    parts: [{ text }]
+  }))
+
+  try {
+    const response = await fetch(
+      useRuntimeConfig().public.GOOGLE_GEMINI_API_KEY,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ contents: formattedHistory })
+      }
+    )
+
+    const data = await response.json()
+    if (!response.ok)
+      throw new Error(data?.error?.message ?? 'Something went wrong!')
+
+    const botMessage = data?.candidates?.[0]?.content?.parts?.[0]?.text
+    if (!botMessage) throw new Error('Invalid response from the server')
+
+    setChatHistory(history => [
+      ...history.filter(msg => msg.text !== 'Thinking...'),
+      { role: 'model', text: botMessage.replace(/\*\*(.*?)\*\*/g, '$1').trim() }
+    ])
+  } catch (error) {
+    setChatHistory(history => [
+      ...history.filter(msg => msg.text !== 'Thinking...'),
+      { role: 'model', text: error.message, isError: true }
+    ])
+  }
+}
+
 const handleSubmit = () => {
   setTimeout(() => {
     chatBodyRef.value?.scrollTo({
@@ -183,7 +249,9 @@ const handleSubmit = () => {
 
   if (userMessage.toLowerCase() === 'clear') {
     localStorage.removeItem(`chatHistory_${userData.value.email}`)
-    chatHistory.value = [{ hideInChat: true, role: 'model', text: companyInfo }]
+    chatHistory.value = [
+      { hideInChat: true, role: 'model', text: instructions }
+    ]
     inputRef.value = ''
     return
   } else if (userMessage.toLowerCase() === 'logout') {
@@ -211,16 +279,13 @@ const handleSubmit = () => {
     }
 
     setTimeout(() => {
-      generateBotResponse(
-        [
-          ...thinkingHistory.filter(msg => msg.text !== 'Thinking...'),
-          {
-            role: 'user',
-            text: `Using the details provided above, please address this query: ${userMessage}. When you want to mention the user, the name is ${userData.value.given_name} or you can address them by their full name ${userData.value.given_name} ${userData.value.family_name}. ${userModdText}`
-          }
-        ],
-        chatHistory
-      )
+      generateBotResponse([
+        ...thinkingHistory.filter(msg => msg.text !== 'Thinking...'),
+        {
+          role: 'user',
+          text: `Using the details provided above, please address this query: ${userMessage}. When you want to mention the user, the name is ${userData.value.given_name} or you can address them by their full name ${userData.value.given_name} ${userData.value.family_name}. ${userModdText}`
+        }
+      ])
     }, 600)
 
     return thinkingHistory
@@ -248,16 +313,13 @@ const handleExploredTopicSelection = topic => {
     ]
 
     setTimeout(() => {
-      generateBotResponse(
-        [
-          ...thinkingHistory.filter(msg => msg.text !== 'Thinking...'),
-          {
-            role: 'user',
-            text: `Use information in ${companyInfo} to answer ${topic} for the support and service you provide on mental health`
-          }
-        ],
-        chatHistory
-      )
+      generateBotResponse([
+        ...thinkingHistory.filter(msg => msg.text !== 'Thinking...'),
+        {
+          role: 'user',
+          text: `Use information in ${instructions} to answer ${topic} for the support and service you provide on mental health`
+        }
+      ])
     }, 600)
 
     return thinkingHistory
