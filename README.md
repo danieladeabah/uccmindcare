@@ -1,6 +1,6 @@
-# UCC MindCare
+# UCC Mindcare
 
-UCC MindCare is a **Nuxt 3**-powered mental health support application designed
+UCC Mindcare is a **Nuxt 3**-powered mental health support application designed
 for students at Cape Coast University. The app provides AI-driven chat support,
 a mood tracker, and a variety of mental health resources, including
 self-assessment tools, guided relaxation, and emergency support. Authentication
@@ -9,7 +9,7 @@ API**.
 
 ## Features
 
-### AI Chatbot (UCC MindCare)
+### AI Chatbot (UCC Mindcare)
 
 - Chat with an AI assistant specialized in mental health.
 - Provides guidance on stress, anxiety, depression, and general well-being.
@@ -97,7 +97,7 @@ The app will be available at **http://localhost:3000**
 ## Usage
 
 1. **Sign in with Google** to access features.
-2. **Chat with UCC MindCare AI** to get mental health guidance.
+2. **Chat with UCC Mindcare AI** to get mental health guidance.
 3. **Track your mood** and set reminders.
 4. **Explore the Resource Library** for videos, articles, and audio guides.
 5. **Use emergency support links** if needed.
