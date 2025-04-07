@@ -1,5 +1,5 @@
-export const metaConfig = {
-  title: 'UCC MindCare',
+export const meta = {
+  title: 'UCC Mindcare',
   link: [
     { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
     {
@@ -16,11 +16,11 @@ export const metaConfig = {
   meta: [
     {
       name: 'description',
-      content: 'UCC MindCare, Mental Health, Support, Counseling'
+      content: 'UCC Mindcare, Mental Health, Support, Counseling'
     },
     {
       name: 'keywords',
-      content: 'UCC MindCare, Mental Health, Support, Counseling'
+      content: 'UCC Mindcare, Mental Health, Support, Counseling'
     },
     { name: 'author', content: 'Daniel Adeabah' },
     { name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
@@ -28,11 +28,11 @@ export const metaConfig = {
     { name: 'googlebot', content: 'index, follow' },
     {
       property: 'og:title',
-      content: 'UCC MindCare'
+      content: 'UCC Mindcare'
     },
     {
       property: 'og:description',
-      content: 'UCC MindCare, Mental Health, Support, Counseling'
+      content: 'UCC Mindcare, Mental Health, Support, Counseling'
     },
     { property: 'og:type', content: 'website' },
     { property: 'og:url', content: 'https://ucc-mindcare.vercel.app' },
@@ -43,11 +43,11 @@ export const metaConfig = {
     { property: 'twitter:card', content: 'summary_large_image' },
     {
       property: 'twitter:title',
-      content: 'UCC MindCare'
+      content: 'UCC Mindcare'
     },
     {
       property: 'twitter:description',
-      content: 'UCC MindCare, Mental Health, Support, Counseling'
+      content: 'UCC Mindcare, Mental Health, Support, Counseling'
     },
     {
       property: 'twitter:image',
