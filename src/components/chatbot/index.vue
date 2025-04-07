@@ -4,7 +4,7 @@
       <div class="flex h-screen flex-col lg:h-[92vh]">
         <div class="flex items-center justify-center py-4 lg:shadow-sm">
           <Logo class="h-6 w-6" />
-          <h2 class="ml-4 text-xl font-bold">UCC MindCare</h2>
+          <h2 class="ml-4 text-xl font-bold">UCC Mindcare</h2>
         </div>
 
         <div
@@ -87,7 +87,7 @@
           <p>Sign in with Google to start a conversation</p>
           <GoogleAuth />
           <p class="py-10 text-sm text-black">
-            © 2025, Group 5, UCC MindCare.
+            © 2025, Group 5, UCC Mindcare.
           </p>
         </div>
 
