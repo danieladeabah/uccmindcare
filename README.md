@@ -51,18 +51,33 @@ Sign in with Google, chat with the AI, track your mood, explore resources, and u
 ## Folder Structure
 
 ```sh
-📦 ucc-mindcare
-├── 📂 assets            # Images, icons, and static files
-├── 📂 constants         # Static values and configurations used throughout the app
-├── 📂 components        # Reusable Vue components
-├── 📂 layouts           # Layout files for the app
-├── 📂 pages             # Nuxt pages (routes)
-├── 📂 prompts           # Predefined chatbot prompts and responses
-├── 📂 utils             # Helper functions and utility methods
-├── app                 # App entry
-├── .env                # Environment variables
-├── nuxt.config.ts      # Nuxt configuration
-└── package.json        # Dependencies and scripts
+uccmindcare/
+├── public/                  # Static public assets (favicon, etc.)
+├── screenshots/             # App screenshots and demo videos
+├── src/
+│   ├── app.vue              # Main app entry
+│   ├── assets/
+│   │   ├── css/
+│   │   │   └── main.css     # Global styles
+│   │   └── icons/           # SVGs and icon components
+│   ├── components/
+│   │   ├── chatbot/         # Chatbot-related components
+│   │   ├── common/          # Shared UI components
+│   ├── constants/           # Static values and configs
+│   ├── layouts/             # App layout wrappers
+│   ├── pages/
+│   │   ├── index.vue        # Home page
+│   │   └── auth/            # Auth pages (Google Auth)
+│   ├── prompts/             # Chatbot prompt logic
+│   └── utils/               # Utility functions
+├── eslint.config.js         # ESLint configuration
+├── meta.ts                  # Meta info
+├── nuxt.config.ts           # Nuxt config
+├── package.json             # Dependencies and scripts
+├── README.md                # Project documentation
+├── tailwind.config.js       # Tailwind CSS config
+├── tsconfig.json            # TypeScript config
+├── yarn-error.log           # Yarn error log
 ```
 
 
