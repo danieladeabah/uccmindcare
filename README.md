@@ -22,9 +22,6 @@ UCC Mindcare is a Nuxt 3-based mental health support app for Cape Coast Universi
 - Vue 3 Composition API
 - Tailwind CSS
 
-yarn build # build the application for production
-yarn preview # locally preview production build
-
 ## Installation
 
 1. Install [Node.js](https://nodejs.org/) (v16+ recommended)
